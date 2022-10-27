@@ -3,17 +3,26 @@ package com.example.mainactivity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
+    static final int REQUEST_IMAGE_CAPTURE = 1;
     private EditText mWebsiteEditText;
     private EditText mLocationEditText;
     private EditText mShareTextEditText;
+    private static final int pic_id = 123;
+    Button camera_open_id;
+    ImageView click_image_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
         mWebsiteEditText = findViewById(R.id.website_edittext);
         mLocationEditText = findViewById(R.id.location_edittext);
         mShareTextEditText = findViewById(R.id.share_edittext);
+        camera_open_id = findViewById(R.id.open_cam_button);
+
+
+
     }
 
     public void openWebsite(View view) {
@@ -63,4 +76,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-}
+    public void takePicture(View view) {
+        Intent intentTakePic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intentTakePic.resolveActivity(getPackageManager()) != null) {
+            startActivity(intentTakePic);
+
+        }
+    }
+
+
+
+    }
+
